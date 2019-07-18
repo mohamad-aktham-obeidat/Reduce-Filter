@@ -19,6 +19,14 @@ and return average age of this array
 
 Ex: avgAge(persons) => 41.2
 */
+function avgAge(arr) {
+  var result = arr.reduce(function(acc, current){
+    return acc+current.age;  // acc = acc + current.age
+  },0) ;
+
+  return result/arr.length;
+}
+console.log(avgAge(persons));
 
 
 /*
@@ -27,12 +35,23 @@ Using Reduce
 Using the varabile persons
 Create a function called longestName
 that accept an array
-and return the longerst full name
+and
+return the longerst full name
 
 Ex: longestName(persons) => 'Soso Al-Amora'
 */
-
-
+function longestName (array){
+  var output = array.reduce(function(previous, current, index){
+    previous = array[0].name.first+' '+array[0].name.last;
+    current = array[index].name.first +' '+array[index].name.last;
+    if (current > previous) {
+      return current;
+    }
+    return previous;
+    })
+    return output;
+}
+console.log(longestName(persons))
 /*
 3
 Using Reduce
@@ -42,8 +61,17 @@ and return max number
 
 Ex: maxNumber([1,2,4,9]) => 9
 */
+function maxNumber(arr){
 
-
+  var output = arr.reduce(function(first, second){
+    if (second > first) {
+      return second;
+    }
+    return first
+   })
+  return output;
+}
+console.log(maxNumber([1,20000,999,50]))
 /*
 4
 Using Reduce
@@ -53,8 +81,18 @@ and return number times that this char repeat inside the string
 
 Ex: repeatChar("hello world",w) => 1
 */
-
-
+function repeatChar(string, char) {
+  string = string.toLowerCase();
+  string = string.split("");
+  var result = string.reduce(function(prev, curr){
+    if (curr === char) {
+      prev ++;
+    }
+    return prev;
+  },0);
+  return result;  
+}
+console.log(repeatChar("hello world",'w'))
 /*
 5
 Using Reduce
@@ -64,7 +102,9 @@ and return array of these two numbers and the numbers between them
 
 Ex: usAndNumberBeetweenUs(2,5) => [2,3,4,5]
 */
-
+function usAndNumberBeetweenUs(num1, num2) {
+  
+}
 
 //Filter 6 - 11
 /*
@@ -76,7 +116,11 @@ and return an array of even number only
 
 Ex: evenOnly([1,8,6,4]) => [8,6,4]
 */
-
+function evenOnly(arr) {
+  var output = arr.filter(even => even % 2 === 0);
+  return output;
+}
+console.log(evenOnly([1,8,6,4]))
 
 /*
 7
@@ -87,7 +131,11 @@ and return an array of these number that is a mutiply by 4
 
 Ex: multiFour([1,8,6,4]) => [8,4]
 */
-
+function multiFour(arr) {
+  var output = arr.filter(multiFour => multiFour % 4 === 0);
+  return output;
+}
+console.log(multiFour([1,8,6,4]))
 
 /*
 8
@@ -101,8 +149,22 @@ and return an array of these string that contain this char
 Ex: containChar(["hello","world"],w) => ["world"]
 Ex: containChar(["hello","world"],l) => ["hello","world"]
 */
+function containChar(srtArray, char) {
+  var words = srtArray.filter(function (current) {
+    var output;
+    var x = current.split("");
+    x.filter(function(currVal) {
+      if(currVal === char){
+        output= current;
+      }
+    });
+    return output;
 
-
+  })
+  return words;
+}
+console.log(containChar(["hello","world"],'w'))
+console.log(containChar(["hello","world"],'l'))
 /*
 9
 Using Filter
