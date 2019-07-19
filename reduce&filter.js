@@ -1,12 +1,41 @@
 console.log('Here is : ', 'Reduce & Filter')
 
 //Using Reduce 1 -5
-var persons = [
-  { name: { first: 'John', last: 'Hob' }, age: 35 },
-  { name: { first: 'Alex', last: 'Mercer' }, age: 25 },
-  { name: { first: 'Alice', last: 'Zaheer' }, age: 24 },
-  { name: { first: 'Zues', last: 'Odin' }, age: 55 },
-  { name: { first: 'Soso', last: 'Al-Amora' }, age: 67 }
+var persons = [{
+    name: {
+      first: 'John',
+      last: 'Hob'
+    },
+    age: 35
+  },
+  {
+    name: {
+      first: 'Alex',
+      last: 'Mercer'
+    },
+    age: 25
+  },
+  {
+    name: {
+      first: 'Alice',
+      last: 'Zaheer'
+    },
+    age: 24
+  },
+  {
+    name: {
+      first: 'Zues',
+      last: 'Odin'
+    },
+    age: 55
+  },
+  {
+    name: {
+      first: 'Soso',
+      last: 'Al-Amora'
+    },
+    age: 67
+  }
 ];
 
 /*
@@ -20,11 +49,11 @@ and return average age of this array
 Ex: avgAge(persons) => 41.2
 */
 function avgAge(arr) {
-  var result = arr.reduce(function(acc, current){
-    return acc+current.age;  // acc = acc + current.age
-  },0) ;
+  var result = arr.reduce(function (acc, current) {
+    return acc + current.age; // acc = acc + current.age
+  }, 0);
 
-  return result/arr.length;
+  return result / arr.length;
 }
 console.log(avgAge(persons));
 
@@ -40,16 +69,16 @@ return the longerst full name
 
 Ex: longestName(persons) => 'Soso Al-Amora'
 */
-function longestName (array){
-  var output = array.reduce(function(previous, current, index){
-    previous = array[0].name.first+' '+array[0].name.last;
-    current = array[index].name.first +' '+array[index].name.last;
+function longestName(array) {
+  var output = array.reduce(function (previous, current, index) {
+    previous = array[0].name.first + ' ' + array[0].name.last;
+    current = array[index].name.first + ' ' + array[index].name.last;
     if (current > previous) {
       return current;
     }
     return previous;
-    })
-    return output;
+  })
+  return output;
 }
 console.log(longestName(persons))
 /*
@@ -61,17 +90,17 @@ and return max number
 
 Ex: maxNumber([1,2,4,9]) => 9
 */
-function maxNumber(arr){
+function maxNumber(arr) {
 
-  var output = arr.reduce(function(first, second){
+  var output = arr.reduce(function (first, second) {
     if (second > first) {
       return second;
     }
     return first
-   })
+  })
   return output;
 }
-console.log(maxNumber([1,20000,999,50]))
+console.log(maxNumber([1, 20000, 999, 50]))
 /*
 4
 Using Reduce
@@ -84,15 +113,15 @@ Ex: repeatChar("hello world",w) => 1
 function repeatChar(string, char) {
   string = string.toLowerCase();
   string = string.split("");
-  var result = string.reduce(function(prev, curr){
+  var result = string.reduce(function (prev, curr) {
     if (curr === char) {
-      prev ++;
+      prev++;
     }
     return prev;
-  },0);
-  return result;  
+  }, 0);
+  return result;
 }
-console.log(repeatChar("hello world",'w'))
+console.log(repeatChar("hello world", 'w'))
 /*
 5
 Using Reduce
@@ -103,9 +132,16 @@ and return array of these two numbers and the numbers between them
 Ex: usAndNumberBeetweenUs(2,5) => [2,3,4,5]
 */
 function usAndNumberBeetweenUs(num1, num2) {
-  
+  var numsBetween = [];
+  while (num1 <= num2) {
+    numsBetween.push(numsBetween.reduce( previous => {
+      return previous
+    }, num1))
+    num1++;
+  }
+  return numsBetween;
 }
-
+console.log(usAndNumberBeetweenUs(2,5));
 //Filter 6 - 11
 /*
 6
@@ -117,10 +153,9 @@ and return an array of even number only
 Ex: evenOnly([1,8,6,4]) => [8,6,4]
 */
 function evenOnly(arr) {
-  var output = arr.filter(even => even % 2 === 0);
-  return output;
+  return arr.filter(even => even % 2 === 0);
 }
-console.log(evenOnly([1,8,6,4]))
+console.log(evenOnly([1, 8, 6, 4]))
 
 /*
 7
@@ -132,10 +167,9 @@ and return an array of these number that is a mutiply by 4
 Ex: multiFour([1,8,6,4]) => [8,4]
 */
 function multiFour(arr) {
-  var output = arr.filter(multiFour => multiFour % 4 === 0);
-  return output;
+ return arr.filter(multiFour => multiFour % 4 === 0);
 }
-console.log(multiFour([1,8,6,4]))
+console.log(multiFour([1, 8, 6, 4]))
 
 /*
 8
@@ -150,21 +184,20 @@ Ex: containChar(["hello","world"],w) => ["world"]
 Ex: containChar(["hello","world"],l) => ["hello","world"]
 */
 function containChar(srtArray, char) {
-  var words = srtArray.filter(function (current) {
+  return srtArray.filter(function (current) {
     var output;
-    var x = current.split("");
-    x.filter(function(currVal) {
-      if(currVal === char){
-        output= current;
+    var latter = current.split("");
+    latter.filter(function (currVal) {
+      if (currVal === char) {
+        output = current;
       }
     });
     return output;
-
   })
-  return words;
+
 }
-console.log(containChar(["hello","world"],'w'))
-console.log(containChar(["hello","world"],'l'))
+console.log(containChar(["hello", "world"], 'w'))
+console.log(containChar(["hello", "world"], 'l'))
 /*
 9
 Using Filter
@@ -175,6 +208,13 @@ and return an array that have the string with odd length in even index
 var strings= ["alex","mercer","madrasa","rashed2","emad","hala"]
 Ex: evenIndexOddLength(strings) => ["madrasa"]
 */
+function evenIndexOddLength(strArray) {
+  return strArray.filter((current, i) => {
+    return i % 2 === 0 && current.length % 2 !== 0
+  })
+}
+var strings = ["alex", "mercer", "madrasa", "rashed2", "emad", "hala"]
+console.log(evenIndexOddLength(strings))
 
 
 /*
@@ -187,7 +227,12 @@ and return the person that have age older than this number
 
 Ex: olderThan(persons,56) => [{ name: { first: 'Soso', last: 'Al-Amora' }, age: 67 }]
 */
-
+function olderThan(array, perAge) {
+  return array.filter((person) => {
+    return person.age > perAge;
+  })
+}
+console.log(olderThan(persons, 56));
 /*
 11
 Using Filter
@@ -198,6 +243,12 @@ and return the shorter string than the number
 var strings= ["alex","mercer","madrasa","rashed2","emad","hala"]
 Ex: shorterThan(strings,5) => ["alex","emad","hala"]
 */
+function shorterThan(strArray, number) {
+  return strArray.filter(name => {
+    return name.length < number;
+  })
+}
+console.log(shorterThan(strings, 5))
 
 /*
 Advanced Part {for your benefits}
@@ -222,6 +273,12 @@ and return the longer string than the number
 var strings= ["alex","mercer","madrasa","rashed2","emad","hala"]
 Ex: longerThan(strings,4) => ["mercer","madrasa","rashed2"]
 */
+function longerThan(strArray, number) {
+  return strArray.filter(name => {
+    return name.length > number;
+  })
+}
+console.log(longerThan(strings, 5))
 
 /*
 13
@@ -234,7 +291,13 @@ var strings= [ 'return', 'phrases', 'with one word' ];
 Ex: onlyOneWord(strings) => [ 'return', 'phrases' ]
 */
 
-
+function onlyOneWord(array) {
+  return array.filter((oneWord) => {
+    return oneWord.indexOf(" ") === -1;
+  })
+}
+var strings2 = ['return', 'phrases', 'with one word'];
+console.log(onlyOneWord(strings2))
 
 /*
 14
